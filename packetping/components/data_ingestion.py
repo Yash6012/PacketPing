@@ -92,6 +92,7 @@ class DataIngestion:
         except Exception as e:
             raise NetworkSecurityException(e, sys)
 
+# Data Validation Steps
 
 # 1. Dataset should have same schema - same no. of columns, features, Distribution must be same
 # 2. Data Drift - Distribution is same or not for trained data and new data

@@ -40,7 +40,8 @@ class DataValidation:
             if len(dataframe.columns) != number_of_columns:
                 return False
 
-            return list(dataframe.columns) == required_columns
+            schema_column_names = [list(column.keys())[0] for column in required_columns]
+            return list(dataframe.columns) == schema_column_names
             
         except Exception as e:
             raise NetworkSecurityException(e, sys)
