@@ -83,10 +83,9 @@ jobs:
           id: login-ecr-deployment
           uses: aws-actions/amazon-ecr-login@v1
 
-        - name: Pull latest image
+        - name: Check ECR Images
           run: |
-            docker pull ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
-        # ... rest of your steps
+            aws ecr list-images --repository-name ${{ secrets.ECR_REPOSITORY_NAME }} --region ${{ secrets.AWS_REGION }}
 
         - name: Pull latest image
           run: |
