@@ -78,6 +78,16 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: ${{ secrets.AWS_REGION }}
 
+        # Add this new step for ECR login
+        - name: Login to Amazon ECR
+          id: login-ecr-deployment
+          uses: aws-actions/amazon-ecr-login@v1
+
+        - name: Pull latest image
+          run: |
+            docker pull ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+        # ... rest of your steps
+
         - name: Pull latest image
           run: |
             docker pull ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
