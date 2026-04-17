@@ -35,7 +35,7 @@ jobs:
               run: |
                 sudo apt-get update
                 sudo apt-get install -y jq unzip
-            
+                        
             - name: Configure AWS Credentials
               uses: aws-actions/configure-aws-credentials@v2
               with:
@@ -70,6 +70,16 @@ jobs:
       steps:
         - name: Checkout
           uses: actions/checkout@v4
+
+        - name: Install AWS CLI
+          run: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip -q awscliv2.zip
+            sudo ./aws/install
+            aws --version
+
+        - name: List ECR images
+          run: aws ecr list-images --repository-name packetping --region us-east-1
 
         - name: Configure AWS Credentials
           uses: aws-actions/configure-aws-credentials@v2
