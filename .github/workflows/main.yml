@@ -71,12 +71,17 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
 
-        - name: Install AWS CLI
+        # - name: Install AWS CLI
+        #   run: |
+        #     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        #     unzip -q awscliv2.zip
+        #     sudo ./aws/install --update
+        #     aws --version]
+        
+        - name: Check AWS CLI
           run: |
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip -q awscliv2.zip
-            sudo ./aws/install
-            aws --version
+            which aws || true
+            aws --version || true
 
         - name: List ECR images
           run: aws ecr list-images --repository-name packetping --region us-east-1
