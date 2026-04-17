@@ -77,7 +77,7 @@ jobs:
         #     unzip -q awscliv2.zip
         #     sudo ./aws/install --update
         #     aws --version]
-        
+
         - name: Check AWS CLI
           run: |
             which aws || true
@@ -104,7 +104,7 @@ jobs:
 
         - name: Pull latest image
           run: |
-            docker pull ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+            docker pull ${{ steps.login-ecr-deployment.outputs.registry }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
         # - name: Stop and Remove container if running
         #   run: |
         #     docker ps -q --filter "name=packetping" | grep -q . && docker stop packetping && docker rm -fv packetping
